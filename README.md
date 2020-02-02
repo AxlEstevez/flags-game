@@ -1,5 +1,5 @@
 # Flags game
-¡ Bienvenidos a  * Flags Game *!
+¡ Bienvenidos a  *Flags Game*!
 
 El proyecto es un juego muy simple.
 
