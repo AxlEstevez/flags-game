@@ -1,8 +1,82 @@
 .header{
+  position: absolute;
 	top: 0px;
 	left: 0px;
 	width: 100%;
-	background-color: pink;
+	background-color: #DF0174;
 	color: white;
 	text-align: center;
+}
+
+.menu{
+  position: absolute;
+  top: 125px;
+  left: 325px;
+  border: 1px solid black;
+  height: 250px;
+  width: 650px;
+  background-color: #2F0B3A;
+  color: #ffffff;
+}
+
+.encabezado-config{
+  font-size: 25px;
+  left: 300px;
+  right: 250px;
+  position: absolute;
+  margin-top: 15px;
+}
+.continentes{
+  top: 80px;
+  left: 180px;
+  display: inline-block;
+  width: 150px;
+  position: absolute;
+  float: right;
+  border-radius: 5px;
+  background-color: #8A0886;
+  color: #ffffff;
+  border-color: #8A0886;
+}
+
+.encabezado-menu{
+  font-size: 15px;
+  display: inline-block;
+  position: absolute;
+  top: 80px;
+  left: 25px;
+  margin-right: 50px;
+}
+
+.encabezado-menu-2{
+  font-size: 15px;
+  display: inline-block;
+  position: absolute;
+  top: 80px;
+  left: 420px;
+}
+
+.play{
+  position: absolute;
+  bottom: 25px;
+  left: 300px;
+  background-color: #01DFA5;
+  border-radius: 5px;
+  border-color: #01DFA5;
+  color: #ffffff;
+  height: 30px;
+  width:75px;
+}
+
+.cantidad {
+  top: 80px;
+  left: 570px;
+  display: inline-block;
+  width: 50px;
+  position: absolute;
+  float: right;
+  border-radius: 5px;
+  background-color: #8A0886;
+  color: #ffffff;
+  border-color: #8A0886;
 }
