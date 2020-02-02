@@ -12,7 +12,7 @@
 	<div class="header">
 		<h1>Juego de Banderas</h1>
 	</div>
-	<div class="menu">
+	<div class="menu" id="contedor-menu">
 	  <h1 class="encabezado-config">Men&uacute;</h1>
 	 <label class="encabezado-menu">Selecciona continente</label>
 	  <select class="continentes">
@@ -30,7 +30,15 @@
 	    <option id="15" value="15">15</option>
 	    <option id="25" value="25">25</option>
 	  </select>
-	  <input type="button" value="jugar" onclick="#" class="play"/>
+	  <label class="options">Facil</label>
+	  <input class="value-options" type="radio" value="facil" id="easy">
+	  <label class="options">Dificil</label>
+	  <input class="value-options" type="radio" value="facil" id="easy">
+	  <input type="button" value="jugar" onclick="comenzar();" class="play"/>
+	</div>
+
+	<div class="tablero" id="tablero">
+		<input type="button" value="Regresar" onclick="menu();">
 	</div>
 </body>
 </html>
