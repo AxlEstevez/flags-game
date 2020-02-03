@@ -15,7 +15,7 @@
 	<div class="menu" id="contedor-menu">
 	  <h1 class="encabezado-config">Men&uacute;</h1>
 	 <label class="encabezado-menu">Selecciona continente</label>
-	  <select class="continentes">
+	  <select class="continentes" id="continete">
 	    <option id="null" value="null"></option>
 	    <option id="america" value="America">America</option>
 	    <option id="asia" value="Asia">Asia</option>
@@ -24,7 +24,7 @@
 	    <option id="oceania" value="Oceania">Oceania</option>
 	  </select>
 	  <label class="encabezado-menu-2">n&uacute;mero de Banderas</label>
-	  <select class="cantidad">
+	  <select class="cantidad" id="cantidad-banderas">
 	    <option id="0" value="0"></option>
 	    <option id="10" value="10">10</option>
 	    <option id="15" value="15">15</option>
@@ -34,7 +34,7 @@
 	  <input class="value-options" type="radio" value="facil" id="easy">
 	  <label class="options">Dificil</label>
 	  <input class="value-options" type="radio" value="facil" id="easy">
-	  <input type="button" value="jugar" onclick="comenzar();" class="play"/>
+	  <input type="button" value="jugar" onclick="comenzar('continete','cantidad-banderas');" class="play"/>
 	</div>
 
 	<div class="tablero" id="tablero">
