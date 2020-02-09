@@ -1,3 +1,13 @@
+// --------------------------------------------------------
+// Archivo: main.js
+// Objetivo: Métodos para lograr un juego de banderas.
+// Fecha de inicio: S.01.02.2020.
+// Fecha de entrega: L.17.02.2020
+// Autor: Axl Estevez, Matricula: 2163070980.
+//   <axlestevez@hotmail.com>
+// --------------------------------------------------------
+
+
 function comenzar(continente, cantidad){
     var continent = document.getElementById(continente).value;
     var banderas = document.getElementById(cantidad).value;
