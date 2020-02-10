@@ -97,11 +97,28 @@
 }
 
 .tablero{
-  position: absolute;
+  position: relative;
   top: 120px;
-  left: 0px;
-  border: 1px solid violet;
-  height: 500px;
-  width: 100%;
+  left: 50px;
+  height: auto;
+  width: 900px;
   display: none;
+}
+
+.box{
+  position: fixed;
+  top: 150px;
+  display: none;
+  right: 5px;
+  border: 1px solid maroon;
+  width: 160px;
+  height: 260px;
+}
+
+.icon-tablero {
+  height: 120px;
+  width: 120px;
+  margin-right: 50px;
+  margin-bottom: 50px;
+  left: 0px;
 }
