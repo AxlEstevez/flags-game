@@ -1,7 +1,6 @@
 # Flags game
 ¡ Bienvenidos a  *Flags Game*!
 
-El proyecto es un juego muy simple.
+Un Juego Muy simple y divertido
 
-Dada la bandera que aparecera, debes colocar el nombre correcto del país a la que
-corresponde dicha bandera.
+Si quieres aprender el nombre de las banderas del mundo, este juego te intereza.
