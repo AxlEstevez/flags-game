@@ -18,9 +18,8 @@ var botonRegresar = document.createElement('input');
 // --------------------------------------------------------
 var totalPaisesAmerica = 45;
 var totalPaisesAsia = 45;
-var totalPaisesAfrica = 59;
-var totalPaisesEuropa = 58;
-var totalPaisesOceania = 20;
+var totalPaisesAfrica = 56;
+var totalPaisesEuropa = 57;
 // --------------------------------------------------------
 // Variables que tendran cargadas las imagenes por
 // continente.
@@ -59,9 +58,34 @@ var paisesAsia = ['oman','irak','libano','qatar','birmania',
     'china'];
 // fin arreglo asia
 // --------------------------------------------------------
-var paisesAfrica = [''];
+var paisesAfrica = ['etiopia','tanzania','mozambique','uganda',
+    'nigeria','tunez','zambia','namibia','mauricio','kenia',
+    'sudafrica','egipto','marruecos','islas canario',
+    'comoras','republica centroafricana','chad','cabo verder',
+    'benin','burundi','camerun','burkina faso','angola',
+    'argelia','botsuana','sierra leona','seychelles','guinea',
+    'gambia','sudan del sur','somalilandia','mauritania',
+    'gabon','togo','somalia','santo Tome y príncipe',
+    'niger','mali','guinea-bisau','eritrea','yibuti','liberia',
+    'yemen','sudan','libia','esuatini','congo','guinea ecuatorial',
+    'zimbabue','ruanda','lesoto','costa de marfiñ','malaui',
+    'madagascar','ghana','senegal'];
 // fin arreglo africa
-var paisesEuropa = [];
+// --------------------------------------------------------
+var paisesEuropa = ['eslovenia','italia','malta','gales',
+    'luxemburgo','lituania','chipre','letonia','serbia',
+    'escocia','islandia','monaco','españa','eslovaquia',
+    'rumania','finlandia','hungria','belgica','noruega',
+    'chequia','ucrania','alemania','irlanda','grecia',
+    'dinamarca','suecia','francia','indonecia','corcega',
+    'suiza','islas baleares','andorra','aland','polonia',
+    'bielorusia','bosnia','albania','pais vasco','azerbaiyan',
+    'croacia','bulgaria','islas feroe','kosovo','inglaterra',
+    'portugal','austria','el vaticano','holanda','san marino',
+    'liechtenstein','macedonia','rusia','montenegro',
+    'moldiva','madeira','estonia','reino unido'];
+// fin arreglo de europa
+// --------------------------------------------------------
 // --------------------------------------------------------
 
 // --------------------------------------------------------
@@ -97,6 +121,40 @@ function inicializaAsia() {
     for(var i = 0; i < totalPaisesAsia; i++){
         texto = ('images/Asia/' + i + ".png");
         asia[i] = cargaImagen(texto);
+    }
+}
+// fin de Método/función.
+// --------------------------------------------------------
+
+// --------------------------------------------------------
+// Método/función : inicializaAfrica
+// Parámetros: Ninguno.
+// Retorna: Nada.
+// Objetivo: Llenar el array Africa con imagenes.
+// --------------------------------------------------------
+function inicializaAfrica() {
+    var texto;
+
+    for(var i = 0; i < totalPaisesAfrica; i++){
+        texto = ('images/Africa/' + i + ".png");
+        africa[i] = cargaImagen(texto);
+    }
+}
+// fin de Método/función.
+// --------------------------------------------------------
+
+// --------------------------------------------------------
+// Método/función : inicializaAfrica
+// Parámetros: Ninguno.
+// Retorna: Nada.
+// Objetivo: Llenar el array Africa con imagenes.
+// --------------------------------------------------------
+function inicializaEuropa() {
+    var texto;
+
+    for(var i = 0; i < totalPaisesEuropa; i++){
+        texto = ('images/Europa/' + i + ".png");
+        europa[i] = cargaImagen(texto);
     }
 }
 // fin de Método/función.
@@ -239,22 +297,12 @@ function menuJuego(continente,noBanderas) {
             cargaBanderas(noBanderas,asia,tablero,totalPaisesAsia);
             break;
         case "Africa":
-            // Código aquí
-            // --------------------------------------------
-            // código de prueba.
-            alert("se despliega " +  noBanderas + " banderas de Africa");
+            inicializaAfrica();
+            cargaBanderas(noBanderas,africa,tablero,totalPaisesAfrica);
             break;
         case "Europa":
-            // Código aquí
-            // --------------------------------------------
-            // código de prueba.
-            alert("se despliega " +  noBanderas + " banderas de Europa");
-            break;
-        case "Oceania":
-            // Código aquí
-            // --------------------------------------------
-            // código de prueba.
-            alert("se despliega " +  noBanderas + " banderas de Oceania");
+            inicializaEuropa();
+            cargaBanderas(noBanderas,europa,tablero,totalPaisesEuropa);
             break;
         default:
             alert("Selecciona una de las opciones");
