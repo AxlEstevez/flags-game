@@ -8,11 +8,6 @@
 // --------------------------------------------------------
 
 // --------------------------------------------------------
-// Constantes
-var botonRegresar = document.createElement('input');
-// --------------------------------------------------------
-
-// --------------------------------------------------------
 // Las variables total representan el total de imagenes
 // contenidas por carpeta.
 // --------------------------------------------------------
@@ -86,6 +81,7 @@ var paisesEuropa = ['eslovenia','italia','malta','gales',
     'moldiva','madeira','estonia','reino unido'];
 // fin arreglo de europa
 // --------------------------------------------------------
+
 // --------------------------------------------------------
 
 // --------------------------------------------------------
@@ -200,6 +196,7 @@ function creaAleatorios(lista,limite,pais){
         }
     }
 }
+// fin Método / Función
 // --------------------------------------------------------
 
 // --------------------------------------------------------
@@ -218,6 +215,7 @@ function busca(A,item){
     }
     return bandera;
 }
+// fin Método / Función
 // --------------------------------------------------------
 
 // --------------------------------------------------------
@@ -236,20 +234,24 @@ function creaListaAleatoria(limite,pais){
     }
     return listaAleatoria;
 }
+// fin Método / Función
+// --------------------------------------------------------
+
 // --------------------------------------------------------
 // Método/función: cargaJuego.
-// Parámetros: noBanderas, arreglo, tablero
+// Parámetros: noBanderas, arreglo,arreglo2,  tablero
 // Retorna: -
 // Objetivo: obtener un número finito de objetos de manera 
 // aleatoria de un arreglo dado.
 // --------------------------------------------------------
-function cargaBanderas(noBanderas, array,tablero,pais) {
+function cargaBanderas(noBanderas, array,array2,tablero,pais){
     var i = 0;
+    var box = document.getElementById("box");
     var aux = creaListaAleatoria(noBanderas,pais);
     while(i < noBanderas){
         var posicion = aux[i];
         tablero.appendChild(array[posicion]);
-        console.log(posicion + " " + array[posicion].src);
+        creaParrafos(array2[posicion],box);
         i++;
     }
 }
@@ -290,19 +292,19 @@ function menuJuego(continente,noBanderas) {
     switch (continente) {
         case "America":
             inicializaAmerica();
-            cargaBanderas(noBanderas,america,tablero,totalPaisesAmerica);
+            cargaBanderas(noBanderas,america,paisesAmerica,tablero,totalPaisesAmerica);
             break;
         case "Asia":
             inicializaAsia();
-            cargaBanderas(noBanderas,asia,tablero,totalPaisesAsia);
+            cargaBanderas(noBanderas,asia,paisesAsia,tablero,totalPaisesAsia);
             break;
         case "Africa":
             inicializaAfrica();
-            cargaBanderas(noBanderas,africa,tablero,totalPaisesAfrica);
+            cargaBanderas(noBanderas,africa,paisesAfrica,tablero,totalPaisesAfrica);
             break;
         case "Europa":
             inicializaEuropa();
-            cargaBanderas(noBanderas,europa,tablero,totalPaisesEuropa);
+            cargaBanderas(noBanderas,europa,paisesEuropa,tablero,totalPaisesEuropa);
             break;
         default:
             alert("Selecciona una de las opciones");
@@ -327,6 +329,24 @@ function menu() {
     esconder.style.display = "block";
     tablero.style.display = "none";
     box.style.display = "none"; 
+}
+// fin Método / Función
+// --------------------------------------------------------
+
+// --------------------------------------------------------
+// Método/función: creaParrafos
+// parametros: texto, destino
+// Retorna: nada
+// Objetivo: crear un elemento html <p> con atributos
+// y colocarlo dentro de un div.
+function creaParrafos(texto,destino){
+    var parrafo = document.createElement("p");
+    var textAux = document.createTextNode(texto);
+    var br = document.createElement("br");
+    parrafo.appendChild(textAux);
+    parrafo.className = "parrafoBox"
+    destino.appendChild(parrafo);
+    destino.appendChild(br);
 }
 // fin Método / Función
 // --------------------------------------------------------

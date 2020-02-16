@@ -106,13 +106,13 @@
 }
 
 .box{
-  position: fixed;
-  top: 150px;
+  position: absolute;
+  top: 120px;
   display: none;
   right: 5px;
   border: 1px solid maroon;
-  width: 160px;
-  height: 260px;
+  width: 150px;
+  height: 600px;
 }
 
 .icon-tablero {
@@ -121,4 +121,10 @@
   margin-right: 50px;
   margin-bottom: 50px;
   left: 0px;
+}
+
+.parrafoBox{
+  left: 5px;
+  display: inline-table;
+  position: absolute;
 }
