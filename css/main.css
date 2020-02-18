@@ -111,7 +111,7 @@
   display: none;
   right: 5px;
   border: 1px solid maroon;
-  width: 150px;
+  width: 250px;
   height: 600px;
 }
 
@@ -127,4 +127,16 @@
   left: 5px;
   display: inline-table;
   position: absolute;
+  cursor: pointer;
+}
+
+.p-prueba{
+  border: 1px solid #01DFA5;
+  position: absolute;
+  top: 350px;
+  width: 150px;
+  height: 25px;
+  cursor: pointer;
+  text-align: center;
+  margin-right: 25px;
 }

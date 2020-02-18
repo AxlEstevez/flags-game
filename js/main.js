@@ -99,7 +99,7 @@ function inicializaAmerica() {
 
     for(var i = 0; i < totalPaisesAmerica; i++){
         texto = ('images/America/' + i + ".png");
-        america[i] = cargaImagen(texto);
+        america[i] = cargaImagen(texto,i);
     }
 }
 // fin de Método/función.
@@ -116,7 +116,7 @@ function inicializaAsia() {
 
     for(var i = 0; i < totalPaisesAsia; i++){
         texto = ('images/Asia/' + i + ".png");
-        asia[i] = cargaImagen(texto);
+        asia[i] = cargaImagen(texto,i);
     }
 }
 // fin de Método/función.
@@ -133,7 +133,7 @@ function inicializaAfrica() {
 
     for(var i = 0; i < totalPaisesAfrica; i++){
         texto = ('images/Africa/' + i + ".png");
-        africa[i] = cargaImagen(texto);
+        africa[i] = cargaImagen(texto,i);
     }
 }
 // fin de Método/función.
@@ -150,7 +150,7 @@ function inicializaEuropa() {
 
     for(var i = 0; i < totalPaisesEuropa; i++){
         texto = ('images/Europa/' + i + ".png");
-        europa[i] = cargaImagen(texto);
+        europa[i] = cargaImagen(texto,i);
     }
 }
 // fin de Método/función.
@@ -164,11 +164,11 @@ function inicializaEuropa() {
 // Objetivo: Crea un objeto de tipo Image(imagen) con el
 // fin de poder manipular ciertos atributos.
 // --------------------------------------------------------
-function cargaImagen(nombre) {
+function cargaImagen(nombre,id) {
     var imagen = new Image();
     imagen.src = nombre;
     imagen.className = "icon-tablero";
-
+    imagen.id = id;
     return imagen;
 }
 // Fin de Método/función.
@@ -250,8 +250,10 @@ function cargaBanderas(noBanderas, array,array2,tablero,pais){
     var aux = creaListaAleatoria(noBanderas,pais);
     while(i < noBanderas){
         var posicion = aux[i];
+        var parrafo = creaParrafoRespuesta(i);
         tablero.appendChild(array[posicion]);
-        creaParrafos(array2[posicion],box);
+        tablero.appendChild(parrafo);
+        creaParrafos(array2[posicion],paisesAmerica[posicion]);
         i++;
     }
 }
@@ -339,16 +341,76 @@ function menu() {
 // Retorna: nada
 // Objetivo: crear un elemento html <p> con atributos
 // y colocarlo dentro de un div.
-function creaParrafos(texto,destino){
+// --------------------------------------------------------
+function creaParrafos(texto, id){
     var parrafo = document.createElement("p");
     var textAux = document.createTextNode(texto);
+    var box = document.getElementById("box");
     var br = document.createElement("br");
     parrafo.appendChild(textAux);
+    parrafo.setAttribute("name",id);
+    parrafo.setAttribute("onclick", "obteneReferencia('" + id + "');");
     parrafo.className = "parrafoBox"
-    destino.appendChild(parrafo);
-    destino.appendChild(br);
+    box.appendChild(parrafo);
+    box.appendChild(br);
+    //return parrafo;
 }
 // fin Método / Función
+// --------------------------------------------------------
+
+// --------------------------------------------------------
+// Método/Función: creaParrafoRespuesta
+// Parametros: nombreId
+// Retorna: nada
+// Objetivo: Crear elementos parrafo de html para poder 
+// colocar las respuestas del usuario
+// --------------------------------------------------------
+function creaParrafoRespuesta(nombreId){
+    var pRespuesta = document.createElement("p");
+    pRespuesta.className = "p-prueba";
+    pRespuesta.setAttribute("onclick","mandaReferencia("+nombreId+");")
+    pRespuesta.id = nombreId;
+    return pRespuesta;
+}
+// fin Método / Función
+// --------------------------------------------------------
+
+// Métodos para permitir la jugabilidad 
+// --------------------------------------------------------
+
+// Variable global para guardar la referencias de la
+// palabra seleccionada.
+var seleccion;
+
+// --------------------------------------------------------
+// Método / Función: obtenerReferencia
+// Parametros: referencia
+// retorna: nada
+// Objetivo: Obtener la referencia del parrafo al dar click
+// sobre el.
+function obteneReferencia(referencia) {
+    seleccion = referencia;
+}
+// fin Método / Función
+// --------------------------------------------------------
+
+// --------------------------------------------------------
+// Método/Función: mandaReferencia
+// Parametros: destino
+// Retorna: nada
+// Objetivo: Colocar el parrafo clickeado anteriormente
+// en un nuevo lugar lugar dentro del documento html.
+function mandaReferencia(destino){
+    var des = document.getElementById(destino);
+    var origen = document.getElementsByName(seleccion);
+    des.textContent = origen[0].textContent;
+    console.log(origen[0].textContent);
+    seleccion = ""
+}
+// fin Método / Función
+// --------------------------------------------------------
+
+// fin de métodos para permitir jugabilidad
 // --------------------------------------------------------
 
 // fin del archivo.
