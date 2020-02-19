@@ -469,8 +469,11 @@ function verifica(){
             errores++;
         }
     }
-    console.log(acietos);
-    console.log(errores);
+    creaInforme(acietos,errores);
+    america = [];
+    asia = []
+    europa = [];
+    africa = [];
 }
 // fin de método / función
 // --------------------------------------------------------
@@ -483,15 +486,145 @@ function verifica(){
 // usuario podra ver el resulado tras terminar su juego.
 // --------------------------------------------------------
 function creaInforme(aciertos,errores){
+    // Variables de la función
+    // ----------------------------------------------------
     var tablero = document.getElementById("tablero");
     var pAciertos = document.createElement("p");
     var pErrores = document.createElement("p");
     var btnMenu = document.createElement("input");
-    var btnPN = document.createElement("input");
-    pAciertos.textContent = aciertos;
-    pErrores.textContent = errores;
+    var btnReplay = document.createElement("input");
+    var contendorInfo = document.createElement("div");
+    // ----------------------------------------------------
 
+    // Se asigna los valores a mostrar: aciertos y errores.
+    // ----------------------------------------------------
+    pAciertos.textContent ="Aciertos: " + aciertos;
+    pErrores.textContent = "Errores: " + errores;
+    // ----------------------------------------------------
+    
+    // se crean los botones que manipularan el flujo del
+    // juego una vez terminado (reinicar, volver a menú).
+    // Se le asignan atributos y valores.
+    // ----------------------------------------------------
+    // botón volver a jugar.
+    btnReplay.type = "button";
+    btnReplay.value = "Volver a jugar";
+    btnReplay.className = "Controles";
+    btnReplay.setAttribute("onclick","recargar();");
+
+    // boton volver a menu
+    btnMenu.type = "button";
+    btnMenu.value = "Volver al menu";
+    btnMenu.className = "Controles";
+    btnMenu.setAttribute("onclick", "vuelveMenu();");
+    // ----------------------------------------------------
+
+    // Se le agrega Atributos, valores a la "ventana" que
+    // mostrara los resultados y se pengan los objetos
+    // creados anteriormente (botones y parrafos).
+    // ----------------------------------------------------
+    contendorInfo.id = "resultado-info";
+    contendorInfo.appendChild(pAciertos);
+    contendorInfo.appendChild(pErrores);
+    contendorInfo.appendChild(btnReplay);
+    contendorInfo.appendChild(btnMenu);
+    // ----------------------------------------------------
+
+    // Por ultimo se agrega la "ventana" emergente al 
+    // tablero.
+    // ----------------------------------------------------
+    tablero.appendChild(contendorInfo);
+    // ----------------------------------------------------
 
 }
+// Fin Método / Función
+// --------------------------------------------------------
+
+// --------------------------------------------------------
+// Método / Función: eliminaTablero
+// Parametros: ninguno
+// Retorna: nada
+// Objetivo: Eliminar las banderas del tablero de juego
+// y los nombre de los paises del Box
+// --------------------------------------------------------
+function eliminaTablero(){
+    // Obtención del tablero actual y sus hijos (banderas)
+    // ----------------------------------------------------
+    var tablero = document.getElementById("tablero");
+    var hijos = document.getElementsByClassName("caja");
+    // ----------------------------------------------------
+   
+    var i = 0; // variable para condicion de paro de while.
+
+    // Se procede a quitar los elementos del tablero
+    // ----------------------------------------------------
+    while(i < hijos.length){
+        tablero.removeChild(hijos[i]);
+    }
+    // ----------------------------------------------------
+
+    // Obtención de contendedor de los nombre de los países
+    // y sus hijos (los nombres).
+    // ----------------------------------------------------
+    var box = document.getElementById("box");
+    var nodesBox = document.getElementsByClassName("parrafoBox");
+    // ----------------------------------------------------
+
+    // Se procede a eliminar los nombres de la Box
+    // ----------------------------------------------------
+    while(i < nodesBox.length){
+        box.removeChild(nodesBox[i]);
+    }
+    // ----------------------------------------------------
+
+    // Se obtiene una referencia al contenedor que muestra
+    // los resultado al usuario con el fin de removerlo
+    // del tablero.
+    // ----------------------------------------------------
+    var result = document.getElementById("resultado-info");
+    tablero.removeChild(result);
+    // ----------------------------------------------------
+}
+// Fin Método / Función
+// --------------------------------------------------------
+
+// --------------------------------------------------------
+// Método / Función: recargar
+// parametro: ninguno
+// Retorna: nada
+// Objetivo: cargar un juego nuevo.
+// --------------------------------------------------------
+function recargar(){
+    // Obtención de los elementos a usar para generar un
+    // nuevo juego
+    // ----------------------------------------------------
+    var palo = document.getElementById("continete").value;
+    var cantidad = document.getElementById("cantidad-banderas").value;
+    // ----------------------------------------------------
+    eliminaTablero();
+    menuJuego(palo,cantidad);
+}
+// Fin método / función()
+// --------------------------------------------------------
+
+// --------------------------------------------------------
+// Método / Función: vuelveMenu
+// parametro: ninguno
+// Retorna: nada
+// Objetivo: Mostrar el menú de inico al usuario.
+function vuelveMenu(){
+    var tablero = document.getElementById("tablero");
+    var menu = document.getElementById("contedor-menu");
+    var box = document.getElementById("box");
+
+    eliminaTablero();
+
+    tablero.style.display = "none";
+    box.style.display ="none";
+    menu.style.display = "block";
+}
+// Fin método / función
+// --------------------------------------------------------
+
 // fin del archivo.
 // --------------------------------------------------------

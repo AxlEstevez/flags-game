@@ -58,7 +58,7 @@
 
 .play{
   position: absolute;
-  bottom: 25px;
+  bottom: 75px;
   left: 280px;
   background-color: #01DFA5;
   border-radius: 5px;
@@ -181,4 +181,30 @@
   color: #ffffff;
   font-size: 15px;
   cursor: pointer;
+}
+
+#resultado-info{
+  z-index: 1;
+  width: 350px;
+  height: 150px;
+  border: 1px solid #01DFA5;
+  background-color: #2F0B3A;
+  color: #ffffff;
+  padding: 10px;
+  position: absolute;
+  background-color: #2F0B3A;
+  top: 15px;
+  left: 250px;
+}
+
+.Controles{
+  background-color: #01DFA5;
+  border-color: #01DFA5;
+  color: #ffffff;
+  height: 50px;
+  width: 100px;
+  border-radius: 10px;
+  position: relative;
+  left: 65px;
+  margin-right: 25px;
 }
