@@ -28,17 +28,17 @@ var oceania = [];
 // Las siguientes variables contendran los nombres de los
 // países por cada continente.
 // --------------------------------------------------------
-var paisesAmerica = ['puerto rico','nicaragua','salvador',
-    'republica dominicana','hawaii','jamaica','honduras',
-    'uruguay','guatemala','panama','ecuador','chile',
-    'venezuela','colombia','argentina','peru','anguilla',
-    'islas caiman','aruba','antigua y barbuda','bonaire',
-    'barbados','bermuda','belice','cuba','costa rica',
-    'bolivia','islas galapagos','martinica','santa lucia',
-    'dominica','estado unidos','san vicente y las granadias',
-    'san eustaquio','san cristobal y nieves','granada',
-    'groelandia','bahamas','surinam','canada','curazao',
-    'trinidad y tobago','mexico','haiti','brasil'];
+var paisesAmerica = ['Puerto Rico','Nicaragua','Salvador',
+    'Republica Dominicana','Hawaii','Jamaica','Honduras',
+    'Uruguay','Guatemala','Panama','Ecuador','Chile',
+    'Venezuela','Colombia','Argentina','Peru','Anguilla',
+    'Islas Caiman','Aruba','Antigua y Barbuda','Bonaire',
+    'Barbados','Bermuda','Belice','Cuba','Costa Rica',
+    'Bolivia','Islas Galapagos','Martinica','Santa Lucia',
+    'Dominíca','Estado unidos','San Vicente y las Granadias',
+    'San Eustaquio','San Cristobal y Nieves','Granada',
+    'Groelandia','Bahamas','Surinam','Canada','Curazao',
+    'Trinidad y Tobago','México','Haiti','Brasil'];
 // fin arreglo america
 // --------------------------------------------------------
 var paisesAsia = ['oman','irak','libano','qatar','birmania',
@@ -244,16 +244,19 @@ function creaListaAleatoria(limite,pais){
 // Objetivo: obtener un número finito de objetos de manera 
 // aleatoria de un arreglo dado.
 // --------------------------------------------------------
-function cargaBanderas(noBanderas, array,array2,tablero,pais){
+function cargaBanderas(noBanderas, array,array2,tablero,pais,
+        nombresPaises){
     var i = 0;
-    var box = document.getElementById("box");
     var aux = creaListaAleatoria(noBanderas,pais);
     while(i < noBanderas){
+        var box = document.createElement("div");
+        box.className = "caja";
         var posicion = aux[i];
         var parrafo = creaParrafoRespuesta(i);
-        tablero.appendChild(array[posicion]);
-        tablero.appendChild(parrafo);
-        creaParrafos(array2[posicion],paisesAmerica[posicion]);
+        box.appendChild(array[posicion]);
+        box.appendChild(parrafo);
+        tablero.appendChild(box);
+        creaParrafos(array2[posicion],nombresPaises[posicion]);
         i++;
     }
 }
@@ -294,19 +297,43 @@ function menuJuego(continente,noBanderas) {
     switch (continente) {
         case "America":
             inicializaAmerica();
-            cargaBanderas(noBanderas,america,paisesAmerica,tablero,totalPaisesAmerica);
+            cargaBanderas(noBanderas,america,paisesAmerica,tablero,
+                totalPaisesAmerica,paisesAmerica);
+            var aux = document.createElement("p")
+            aux.id = "aux";
+            aux.textContent = continente;
+            aux.style.display = "none";
+            tablero.appendChild(aux);
             break;
         case "Asia":
             inicializaAsia();
-            cargaBanderas(noBanderas,asia,paisesAsia,tablero,totalPaisesAsia);
+            cargaBanderas(noBanderas,asia,paisesAsia,tablero,
+                totalPaisesAsia,paisesAsia);
+            var aux = document.createElement("p")
+            aux.id = "aux";
+            aux.textContent = continente;
+            aux.style.display = "none";
+            tablero.appendChild(aux);
             break;
         case "Africa":
             inicializaAfrica();
-            cargaBanderas(noBanderas,africa,paisesAfrica,tablero,totalPaisesAfrica);
+            cargaBanderas(noBanderas,africa,paisesAfrica,tablero,
+                totalPaisesAfrica,paisesAfrica);
+            var aux = document.createElement("p")
+            aux.id = "aux";
+            aux.textContent = continente;
+            aux.style.display = "none";
+            tablero.appendChild(aux);
             break;
         case "Europa":
             inicializaEuropa();
-            cargaBanderas(noBanderas,europa,paisesEuropa,tablero,totalPaisesEuropa);
+            cargaBanderas(noBanderas,europa,paisesEuropa,tablero,
+                totalPaisesEuropa,paisesEuropa);
+            var aux = document.createElement("p")
+            aux.id = "aux";
+            aux.textContent = continente;
+            aux.style.display = "none";
+            tablero.appendChild(aux);
             break;
         default:
             alert("Selecciona una de las opciones");
@@ -352,7 +379,6 @@ function creaParrafos(texto, id){
     parrafo.setAttribute("onclick", "obteneReferencia('" + id + "');");
     parrafo.className = "parrafoBox"
     box.appendChild(parrafo);
-    box.appendChild(br);
     //return parrafo;
 }
 // fin Método / Función
@@ -368,8 +394,8 @@ function creaParrafos(texto, id){
 function creaParrafoRespuesta(nombreId){
     var pRespuesta = document.createElement("p");
     pRespuesta.className = "p-prueba";
-    pRespuesta.setAttribute("onclick","mandaReferencia("+nombreId+");")
-    pRespuesta.id = nombreId;
+    pRespuesta.setAttribute("onclick","mandaReferencia(\""+nombreId+"\");")
+    pRespuesta.setAttribute("name",nombreId);
     return pRespuesta;
 }
 // fin Método / Función
@@ -401,10 +427,10 @@ function obteneReferencia(referencia) {
 // Objetivo: Colocar el parrafo clickeado anteriormente
 // en un nuevo lugar lugar dentro del documento html.
 function mandaReferencia(destino){
-    var des = document.getElementById(destino);
+    var des = document.getElementsByName(destino);
     var origen = document.getElementsByName(seleccion);
-    des.textContent = origen[0].textContent;
-    console.log(origen[0].textContent);
+    des[0].textContent = origen[0].textContent;
+    origen[0].style.textDecoration = "line-through"
     seleccion = ""
 }
 // fin Método / Función
@@ -413,5 +439,59 @@ function mandaReferencia(destino){
 // fin de métodos para permitir jugabilidad
 // --------------------------------------------------------
 
+
+// --------------------------------------------------------
+// Método / Función: verifica
+// Parametros: nada
+// Retorna: nada
+// Objetivo: verifica que cada par de bandera y parrafo 
+// Corresponda entre si, de no coresponder llevara la 
+// de todos los errores encontrados
+// --------------------------------------------------------
+function verifica(){
+    var parrafos = document.getElementsByClassName("p-prueba");
+    var banderas = document.getElementsByClassName("icon-tablero");
+    var pais = document.getElementById("aux").textContent;
+    var acietos = 0;
+    var errores = 0;
+    var arregloAux;
+
+    if(pais == "America"){ arregloAux = paisesAmerica; }
+    if(pais == "Asia"){ arregloAux = paisesAsia; }
+    if(pais == "Africa"){ arregloAux = paisesAfrica; }
+    if(pais == "Europa"){ arregloAux = paisesEuropa; }
+
+    for(let i = 0; i < parrafos.length; i++){
+        if(banderas[i].id == arregloAux.indexOf(parrafos[i].textContent)){
+            acietos++;
+        }
+        else{
+            errores++;
+        }
+    }
+    console.log(acietos);
+    console.log(errores);
+}
+// fin de método / función
+// --------------------------------------------------------
+
+// --------------------------------------------------------
+// Método / Función: creaInforme
+// Parametros: aciertos, errores
+// Retorna: nada
+// Objetivo: crea una "ventana" emergente en donde el
+// usuario podra ver el resulado tras terminar su juego.
+// --------------------------------------------------------
+function creaInforme(aciertos,errores){
+    var tablero = document.getElementById("tablero");
+    var pAciertos = document.createElement("p");
+    var pErrores = document.createElement("p");
+    var btnMenu = document.createElement("input");
+    var btnPN = document.createElement("input");
+    pAciertos.textContent = aciertos;
+    pErrores.textContent = errores;
+
+
+}
 // fin del archivo.
 // --------------------------------------------------------

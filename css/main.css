@@ -106,37 +106,79 @@
 }
 
 .box{
-  position: absolute;
+  position: fixed;
   top: 120px;
   display: none;
   right: 5px;
   border: 1px solid maroon;
-  width: 250px;
-  height: 600px;
+  width: 350px;
+  height: 500px;
 }
-
+/*Como se comportan las imagenes dentro del div*/
 .icon-tablero {
   height: 120px;
   width: 120px;
-  margin-right: 50px;
-  margin-bottom: 50px;
-  left: 0px;
+  margin-right: 30px;
+  margin-bottom: 0px;
+  left: 50px;
+  position: relative;
 }
-
+/*Esto es el estilo del parrado del box*/
 .parrafoBox{
-  left: 5px;
-  display: inline-table;
+  left: 15px;
+  top: 80px;
   position: absolute;
   cursor: pointer;
+  float: left;
+  position: relative;
+  margin-right: 25px;
+  margin-top: 1px;
+  color: #d81455;
+  font-size: 15px;
+  font-family: cursive;
 }
-
+/*estos son los parrafos de las cajas*/
 .p-prueba{
   border: 1px solid #01DFA5;
-  position: absolute;
-  top: 350px;
-  width: 150px;
+  position: relative;
+  margin-top: 1px;
+  width: 220px;
+  left:  0px;
   height: 25px;
   cursor: pointer;
   text-align: center;
-  margin-right: 25px;
+  margin-right: 0px;
+  margin-left: 0px;
+}
+/*Esto el como se comporta el div*/
+.caja{
+  position: relative;
+  height: 150px;
+  width: 220px;
+  margin-top: 10px;
+  margin-bottom: 25px;
+  margin-right: 50px;
+  padding: 5px;
+  /*border: 1px solid #2F0B3A;*/
+  display: inline-block;
+}
+
+.encabeadoBox{
+  position: absolute;
+  left: 120px;
+  color: #2F0B3A;
+}
+
+.BotonVerifica{
+  border-color: #8A0886;
+  background-color: #DF0174;
+  bottom: 15px;
+  position: absolute;
+  left: 120px;
+  width: 100px;
+  height: 60px;
+  border-radius: 15px;
+  color: #ffffff;
+  font-size: 15px;
+  cursor: pointer;
 }
