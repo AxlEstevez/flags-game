@@ -449,18 +449,32 @@ function mandaReferencia(destino){
 // de todos los errores encontrados
 // --------------------------------------------------------
 function verifica(){
+    // Variables de la función
+    // ----------------------------------------------------
     var parrafos = document.getElementsByClassName("p-prueba");
     var banderas = document.getElementsByClassName("icon-tablero");
     var pais = document.getElementById("aux").textContent;
     var acietos = 0;
     var errores = 0;
     var arregloAux;
+    // ----------------------------------------------------
 
+    // ----------------------------------------------------
+    // Hace comparaciones de acuerdo al continente que se 
+    // esta jugando y asigna el arreglo dado que contiene
+    // los nombre de las países por contienete
+    // ----------------------------------------------------
     if(pais == "America"){ arregloAux = paisesAmerica; }
     if(pais == "Asia"){ arregloAux = paisesAsia; }
     if(pais == "Africa"){ arregloAux = paisesAfrica; }
     if(pais == "Europa"){ arregloAux = paisesEuropa; }
+    // ----------------------------------------------------
 
+    // ----------------------------------------------------
+    // Se dispone a verificar cada par de bandera - parrafo
+    // y se suman los aciertos y los errores cada que sean
+    // iguales o distintos
+    // ----------------------------------------------------
     for(let i = 0; i < parrafos.length; i++){
         if(banderas[i].id == arregloAux.indexOf(parrafos[i].textContent)){
             acietos++;
@@ -469,6 +483,7 @@ function verifica(){
             errores++;
         }
     }
+    // ----------------------------------------------------
     creaInforme(acietos,errores);
     america = [];
     asia = []
