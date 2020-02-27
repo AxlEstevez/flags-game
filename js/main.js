@@ -446,17 +446,20 @@ function mandaReferencia(destino){
 // Retorna: nada
 // Objetivo: verifica que cada par de bandera y parrafo 
 // Corresponda entre si, de no coresponder llevara la 
-// de todos los errores encontrados
+// cuenta de todos los errores encontrados
 // --------------------------------------------------------
 function verifica(){
     // Variables de la función
     // ----------------------------------------------------
     var parrafos = document.getElementsByClassName("p-prueba");
     var banderas = document.getElementsByClassName("icon-tablero");
+    var contendedor = document.getElementsByClassName("caja");
     var pais = document.getElementById("aux").textContent;
     var acietos = 0;
     var errores = 0;
     var arregloAux;
+    var acieto = "./images/acierto.png";
+    var error = "./images/error.png";
     // ----------------------------------------------------
 
     // ----------------------------------------------------
@@ -477,10 +480,16 @@ function verifica(){
     // ----------------------------------------------------
     for(let i = 0; i < parrafos.length; i++){
         if(banderas[i].id == arregloAux.indexOf(parrafos[i].textContent)){
+            console.log(banderas[i].id+" "+
+                arregloAux.indexOf(parrafos[i].textContent));
             acietos++;
+            pegaAciertoError(acieto,contendedor[i]);
         }
         else{
+            console.log(banderas[i].id+" "+
+                arregloAux.indexOf(parrafos[i].textContent));
             errores++;
+            pegaAciertoError(error,contendedor[i]);
         }
     }
     // ----------------------------------------------------
@@ -627,6 +636,7 @@ function recargar(){
 // parametro: ninguno
 // Retorna: nada
 // Objetivo: Mostrar el menú de inico al usuario.
+// --------------------------------------------------------
 function vuelveMenu(){
     var tablero = document.getElementById("tablero");
     var menu = document.getElementById("contedor-menu");
@@ -637,6 +647,36 @@ function vuelveMenu(){
     tablero.style.display = "none";
     box.style.display ="none";
     menu.style.display = "block";
+}
+// Fin método / función
+// --------------------------------------------------------
+
+
+// --------------------------------------------------------
+// Método / Función: creaimagenGenerica
+// Parámetros: ninguno
+// Retorno: objeto de tipo imagen
+// Objetivo: crear objetos de típo Images
+// --------------------------------------------------------
+function creaimagenGenerica(){
+    var imagen = new Image();
+    return imagen;
+}
+// Fin método / función
+// --------------------------------------------------------
+
+// --------------------------------------------------------
+// Método / Función: pegaAciertoError
+// Parámetros: String opcion, DIV destino
+// Retorno: nada
+// Objetivo: mostrar los aciertos u errores del usuario de
+// manera gráfica.
+// --------------------------------------------------------
+function pegaAciertoError(opcion,destino){
+    var imagen = creaimagenGenerica();
+    imagen.src = opcion;
+    imagen.className = "iconAE";
+    destino.appendChild(imagen);
 }
 // Fin método / función
 // --------------------------------------------------------
