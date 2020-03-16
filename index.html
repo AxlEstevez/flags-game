@@ -29,7 +29,13 @@
 	    <option id="15" value="15">15</option>
 	    <option id="25" value="25">25</option>
 	  </select>
-	  <input type="button" value="jugar" onclick="start('continete','cantidad-banderas');" class="play"/>
+	  <label for="opc" class="value-options">Selecciona opci&oacute;n</label>
+	  <select id="opcion" class="options">
+		  <option value="0"> </option>
+		  <option id="opc1" value="1">Opcion 1</option>
+		  <option id="opc2" value="2">Opcion 2</option>
+	  </select>
+	  <input type="button" value="jugar" onclick="start('continete','cantidad-banderas','opcion');" class="play"/>
 	</div>
 
 	<div class="tablero" id="tablero">
@@ -38,7 +44,7 @@
 
 	<div class="box" id="box">
 		<h1 class="encabeadoBox">Pa&iacute;ses</h1>
-		<input class="BotonVerifica" type="button" value="Verificar" onclick="verifica();">
+		<input id="botonVerifica" class="BotonVerifica" type="button" value="Verificar" onclick="verifica();">
 	</div>
 </body>
 </html>

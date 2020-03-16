@@ -81,7 +81,7 @@ var paisesEuropa = ['eslovenia','italia','malta','gales',
     'moldiva','madeira','estonia','reino unido'];
 // fin arreglo de europa
 // --------------------------------------------------------
-
+var intentos = 0;
 // --------------------------------------------------------
 
 // --------------------------------------------------------
@@ -251,8 +251,9 @@ function cargaBanderas(noBanderas, array,array2,tablero,pais,
     while(i < noBanderas){
         var box = document.createElement("div");
         box.className = "caja";
+        box.id = ("div"+i);
         var posicion = aux[i];
-        var parrafo = creaParrafoRespuesta(i);
+        var parrafo = creaParrafoRespuesta(i,box.id);
         box.appendChild(array[posicion]);
         box.appendChild(parrafo);
         tablero.appendChild(box);
@@ -280,7 +281,6 @@ function start(continente, cantidad){
     esconder.style.display = "none";
     tablero.style.display = "block";
     menuJuego(continent,banderas);
-   
 }
 // fin Método / Función
 // --------------------------------------------------------
@@ -336,8 +336,7 @@ function menuJuego(continente,noBanderas) {
             tablero.appendChild(aux);
             break;
         default:
-            alert("Selecciona una de las opciones");
-            
+            alert("Selecciona un Continente");
             break;
     }
 }
@@ -373,7 +372,6 @@ function creaParrafos(texto, id){
     var parrafo = document.createElement("p");
     var textAux = document.createTextNode(texto);
     var box = document.getElementById("box");
-    var br = document.createElement("br");
     parrafo.appendChild(textAux);
     parrafo.setAttribute("name",id);
     parrafo.setAttribute("onclick", "obteneReferencia('" + id + "');");
@@ -391,10 +389,10 @@ function creaParrafos(texto, id){
 // Objetivo: Crear elementos parrafo de html para poder 
 // colocar las respuestas del usuario
 // --------------------------------------------------------
-function creaParrafoRespuesta(nombreId){
+function creaParrafoRespuesta(nombreId,contenedor){
     var pRespuesta = document.createElement("p");
     pRespuesta.className = "p-prueba";
-    pRespuesta.setAttribute("onclick","mandaReferencia(\""+nombreId+"\");")
+    pRespuesta.setAttribute("onclick","mandaReferencia(\""+nombreId+"\",\""+contenedor+"\");")
     pRespuesta.setAttribute("name",nombreId);
     return pRespuesta;
 }
@@ -426,12 +424,17 @@ function obteneReferencia(referencia) {
 // Retorna: nada
 // Objetivo: Colocar el parrafo clickeado anteriormente
 // en un nuevo lugar lugar dentro del documento html.
-function mandaReferencia(destino){
+function mandaReferencia(destino,contenedor){
     var des = document.getElementsByName(destino);
     var origen = document.getElementsByName(seleccion);
+    var opt = document.getElementById("opcion").value;
     des[0].textContent = origen[0].textContent;
     origen[0].style.textDecoration = "line-through"
     seleccion = ""
+
+    if(opt == 2){
+        verificaInstante(contenedor);
+    }
 }
 // fin Método / Función
 // --------------------------------------------------------
@@ -455,6 +458,7 @@ function verifica(){
     var banderas = document.getElementsByClassName("icon-tablero");
     var contendedor = document.getElementsByClassName("caja");
     var pais = document.getElementById("aux").textContent;
+    var opcionJugada = document.getElementById("opcion").value;
     var acietos = 0;
     var errores = 0;
     var arregloAux;
@@ -474,30 +478,39 @@ function verifica(){
     // ----------------------------------------------------
 
     // ----------------------------------------------------
-    // Se dispone a verificar cada par de bandera - parrafo
-    // y se suman los aciertos y los errores cada que sean
-    // iguales o distintos
+    // Si la opción que se esta jugando es la opción 2
+    // Manda a llamar al método creaInforme2
     // ----------------------------------------------------
-    for(let i = 0; i < parrafos.length; i++){
-        if(banderas[i].id == arregloAux.indexOf(parrafos[i].textContent)){
-            console.log(banderas[i].id+" "+
-                arregloAux.indexOf(parrafos[i].textContent));
-            acietos++;
-            pegaAciertoError(acieto,contendedor[i]);
-        }
-        else{
-            console.log(banderas[i].id+" "+
-                arregloAux.indexOf(parrafos[i].textContent));
-            errores++;
-            pegaAciertoError(error,contendedor[i]);
-        }
+    if(opcionJugada == 2){
+        creainforme2();
     }
     // ----------------------------------------------------
-    creaInforme(acietos,errores);
-    america = [];
-    asia = []
-    europa = [];
-    africa = [];
+    // si la  opcion jugags es 1 Se dispone a verificar 
+    // cada par de bandera - parrafoy se suman los aciertos 
+    // y los errores cada que sean iguales o distintos
+    // ----------------------------------------------------
+    if(opcionJugada == 1){
+        for(let i = 0; i < parrafos.length; i++){
+            if(banderas[i].id == arregloAux.indexOf(parrafos[i].textContent)){
+                console.log(banderas[i].id+" "+
+                    arregloAux.indexOf(parrafos[i].textContent));
+                acietos++;
+                pegaAciertoError(acieto,contendedor[i]);
+            }
+            else{
+                console.log(banderas[i].id+" "+
+                    arregloAux.indexOf(parrafos[i].textContent));
+                errores++;
+                pegaAciertoError(error,contendedor[i]);
+            }
+        }
+        // ----------------------------------------------------
+        creaInforme(acietos,errores);
+        america = [];
+        asia = []
+        europa = [];
+        africa = [];
+    }
 }
 // fin de método / función
 // --------------------------------------------------------
@@ -677,6 +690,106 @@ function pegaAciertoError(opcion,destino){
     imagen.src = opcion;
     imagen.className = "iconAE";
     destino.appendChild(imagen);
+}
+// Fin método / función
+// --------------------------------------------------------
+
+
+// --------------------------------------------------------
+// Método / Función: verificaInstante
+// Parámetros: contenedorActual string id de elemento
+// Retorno: nada
+// Objetivo: Verifica si los hijos del contendor actual
+// Coinciden en valores. Si coinciden pinta de color verde
+// al contenedor actual, si no lo pinta de color rojo.
+// --------------------------------------------------------
+function verificaInstante(contenedorActual){
+    var contendor = document.getElementById(contenedorActual);
+    var pais = document.getElementById("continete").value;
+    var arregloAux = [];
+    if(pais == "America"){ arregloAux = paisesAmerica; }
+    if(pais == "Asia"){ arregloAux = paisesAsia; }
+    if(pais == "Africa"){ arregloAux = paisesAfrica; }
+    if(pais == "Europa"){ arregloAux = paisesEuropa; }
+
+   
+    if(contendor.hasChildNodes){
+        var hijos = contendor.childNodes;
+        if(hijos.length > 0){
+            console.log(hijos[0].id);
+            console.log(hijos[1].textContent);
+            if(hijos[0].id == arregloAux.indexOf(hijos[1].textContent)){
+                contendor.style.backgroundColor = "#2abd62";
+            }
+            else{
+                contendor.style.backgroundColor = "#F5245D";
+                intentos++;
+            }
+        }
+        else{
+            console.log("err");
+        }
+    }
+
+}
+// Fin método / función
+// --------------------------------------------------------
+
+// --------------------------------------------------------
+// Método / Función: creaInforme2
+// Parametros: nada
+// Retorna: nada
+// Objetivo: crea una "ventana" emergente en donde el
+// usuario podra ver los intentos que hizon antes de 
+// acertar todos los nombre correspondientes a las banderas
+// --------------------------------------------------------
+function creainforme2(){
+     // Variables de la función
+    // ----------------------------------------------------
+    var tablero = document.getElementById("tablero");
+    var pintentos = document.createElement("p");
+    var btnMenu = document.createElement("input");
+    var btnReplay = document.createElement("input");
+    var contendorInfo = document.createElement("div");
+    // ----------------------------------------------------
+
+    // Se asigna los valores a mostrar: intentos
+    // ----------------------------------------------------
+    pintentos.textContent ="Intentos: " + intentos;
+    // ----------------------------------------------------
+    
+    // se crean los botones que manipularan el flujo del
+    // juego una vez terminado (reinicar, volver a menú).
+    // Se le asignan atributos y valores.
+    // ----------------------------------------------------
+    // botón volver a jugar.
+    btnReplay.type = "button";
+    btnReplay.value = "Volver a jugar";
+    btnReplay.className = "Controles";
+    btnReplay.setAttribute("onclick","recargar();");
+
+    // boton volver a menu
+    btnMenu.type = "button";
+    btnMenu.value = "Volver al menu";
+    btnMenu.className = "Controles";
+    btnMenu.setAttribute("onclick", "vuelveMenu();");
+    // ----------------------------------------------------
+
+    // Se le agrega Atributos, valores a la "ventana" que
+    // mostrara los resultados y se pengan los objetos
+    // creados anteriormente (botones y parrafos).
+    // ----------------------------------------------------
+    contendorInfo.id = "resultado-info";
+    contendorInfo.appendChild(pintentos);
+    contendorInfo.appendChild(btnReplay);
+    contendorInfo.appendChild(btnMenu);
+    // ----------------------------------------------------
+
+    // Por ultimo se agrega la "ventana" emergente al 
+    // tablero.
+    // ----------------------------------------------------
+    tablero.appendChild(contendorInfo);
+    // ----------------------------------------------------
 }
 // Fin método / función
 // --------------------------------------------------------
